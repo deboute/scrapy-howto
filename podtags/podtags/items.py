@@ -7,8 +7,12 @@
 
 import scrapy
 
-
-class PodtagsItem(scrapy.Item):
-    # define the fields for your item here like:
-    # name = scrapy.Field()
-    pass
+class PodcastItem(scrapy.Item):
+    """This class defines a podcast
+    """
+    id = scrapy.Field()
+    thumbnail = scrapy.Field()
+    title = scrapy.Field()
+    description = scrapy.Field()
+    homepage = scrapy.Field()
+    reviews = scrapy.Field()
