@@ -52,7 +52,8 @@ Podbay lists podcasts by category, giving us links to individual podcast pages "
 
 Reviews for a podcast are accessible at "/show/$podcast_id/reviews".
 
-By using xpath requests on a podcast's page we can easiy retrieve the following elements:
+By using xpath requests on a podcast's page we can easily retrieve the following elements:
+
 - id
 - thumbnail
 - title
