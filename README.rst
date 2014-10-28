@@ -31,5 +31,5 @@ License
 
 MIT licensed. See the bundled `LICENSE <https://github.com/deboute/scrappy-howto/blob/master/LICENSE>`_ file for more details.
 
-.. _Scrappy: http://scrapy.org
+.. _Scrapy: http://scrapy.org
 .. _Twisted: https://twistedmatrix.com/trac/
