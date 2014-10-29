@@ -4,16 +4,25 @@
 # vim: ai ts=4 sts=4 et sw=4
 """
 Here goes item processing
+
+See: http://doc.scrapy.org/en/latest/topics/item-pipeline.html
 """
-# Define your item pipelines here
 #
-# Don't forget to add your pipeline to the ITEM_PIPELINES setting
-# See: http://doc.scrapy.org/en/latest/topics/item-pipeline.html
+# IMPORTS
+#
+# BASE 
+import re
+import os
+# SCRAPY
 from scrapy.exceptions import DropItem
 
+#
+# PIPELINE CLASSES
+#
 class RemovesDuplicatesPipeline(object):
     """
-    From scrapy documentation
+    From scrapy documentation.
+    Removes duplicate entries.
     """
     def __init__(self):
         self.ids_seen = set()
@@ -26,8 +35,15 @@ class RemovesDuplicatesPipeline(object):
             return item
 
 class ValidatesPipeline(object):
+    """
+    Manages simple items validation
+    """
     def process_item(self, item, spider):
         # add validation to taste
         if not item['reviews']:
             raise DropItem("No reviews for item: {}".format(item))
         return item
+
+class ParsesReviewsPipeline(object):
+    def process_item(self, item, spider):
+        pass

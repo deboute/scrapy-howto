@@ -5,10 +5,16 @@
 """
 Spider definition for podbay.fm
 """
+#
+# IMPORTS
+#
+#SCRAPY
 from scrapy.contrib.spiders import CrawlSpider, Rule
 from scrapy.contrib.linkextractors import LinkExtractor
+# CUSTOM
 from podtags.items import PodcastItem
 
+# DECORATOR
 def fail_parsing(func):
     """Do not use while debugging xpath
     """
@@ -20,6 +26,7 @@ def fail_parsing(func):
             pass
     return wrapper
 
+# SPIDER
 class PodbaySpiderForGames(CrawlSpider):
     """This class defines a spider that parses games and hobbies podcasts
     in order to fetch basic data on them and a stack of reviews
