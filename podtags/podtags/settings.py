@@ -20,3 +20,8 @@ NEWSPIDER_MODULE = 'podtags.spiders'
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 USER_AGENT = 'Mozilla/5.0 (X11; Linux x86_64; rv:31.0) Gecko/20100101 Firefox/31.0 Iceweasel/31.1.0'
+
+ITEM_PIPELINES = {
+    'podtags.pipelines.RemovesDuplicatesPipeline': 100,
+    'podtags.pipelines.ValidatesPipeline': 200,
+}

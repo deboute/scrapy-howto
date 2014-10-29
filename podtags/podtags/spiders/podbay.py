@@ -8,7 +8,17 @@ Spider definition for podbay.fm
 from scrapy.contrib.spiders import CrawlSpider, Rule
 from scrapy.contrib.linkextractors import LinkExtractor
 from podtags.items import PodcastItem
-import sys
+
+def fail_parsing(func):
+    """Do not use while debugging xpath
+    """
+    def wrapper(*args, **kwargs):
+        try:
+            return func(*args, **kwargs)
+        except:
+            # add logging to taste.
+            pass
+    return wrapper
 
 class PodbaySpiderForGames(CrawlSpider):
     """This class defines a spider that parses games and hobbies podcasts
@@ -18,7 +28,8 @@ class PodbaySpiderForGames(CrawlSpider):
     name = 'podbay'
     allowed_domains = ['podbay.fm']
     start_urls = [
-        'http://podbay.fm/browse/games-and-hobbies'
+        #'http://podbay.fm/browse/games-and-hobbies'
+        'http://podbay.fm/show/580709168'
     ]
     rules = [
         # first rule extracts individual podcast pages links from start_url
@@ -33,6 +44,7 @@ class PodbaySpiderForGames(CrawlSpider):
         ),
     ]
 
+    @fail_parsing
     def parse_podcast(self, response):
         """This function gets basic data for a podcast
 
