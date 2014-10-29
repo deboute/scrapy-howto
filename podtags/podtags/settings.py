@@ -1,5 +1,10 @@
 # -*- coding: utf-8 -*-
-
+# -*- python -*-
+# use 4 spaces to indent, NO TAB
+# vim: ai ts=4 sts=4 et sw=4
+"""
+Spider settings
+"""
 # Scrapy settings for podtags project
 #
 # For simplicity, this file contains only the most important settings by

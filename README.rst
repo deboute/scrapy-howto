@@ -1,5 +1,6 @@
+*******************
 Simple scrapy howto
-===================
+*******************
 
 `Scrapy`_ is a python framework allowing the easy creation if web crawlers, spiders and scrappers.
 
@@ -7,8 +8,17 @@ This howto will show how to scrap a podcast directory and extract reviews in ord
 
 This will enable us to see which words are used the most to describe each podcast.
 
+**Table of Contents**
+
+
+.. contents::
+    :local:
+    :depth: 1
+    :backlinks: none
+
+==============
 install scrapy
---------------
+==============
 
 ::
 
@@ -17,8 +27,9 @@ install scrapy
 
 `Scrapy`_ is built upon `Twisted`_, the asynchronous multi-protocol networking framework.
 
+==========================
 Start a new scrapy project
---------------------------
+==========================
 
 `Scrapy`_ provides a CLI, very much like django-admin, that allows you to setup a new project
 
@@ -43,8 +54,9 @@ This will tell `Scrapy`_ to create the basic files it needs
   └── scrapy.cfg
 
 
+===============
 Create a spider
----------------
+===============
 
 Our project needs to fetch information from a podcast directory, we will use podbay.fm as an example.
 
@@ -54,16 +66,17 @@ Reviews for a podcast are accessible at "/show/$podcast_id/reviews".
 
 By using xpath requests on a podcast's page we can easily retrieve the following elements:
 
-- id
-- thumbnail
-- title
-- description
-- homepage
+* id
+* thumbnail
+* title
+* description
+* homepage
 
 We will be able afterwards to trigger the retrieval of the reviews page in order to start parsing reviews in order to build a tag cloud
 
+=======
 License
--------
+=======
 
 MIT licensed. See the bundled `LICENSE <https://github.com/deboute/scrappy-howto/blob/master/LICENSE>`_ file for more details.
 

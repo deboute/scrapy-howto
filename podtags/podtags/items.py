@@ -1,5 +1,10 @@
 # -*- coding: utf-8 -*-
-
+# -*- python -*-
+# use 4 spaces to indent, NO TAB
+# vim: ai ts=4 sts=4 et sw=4
+"""
+Definition of a Podcast object
+"""
 # Define here the models for your scraped items
 #
 # See documentation in:
