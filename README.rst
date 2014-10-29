@@ -60,19 +60,18 @@ Create a spider
 
 Our project needs to fetch information from a podcast directory, we will use podbay.fm as an example.
 
-Podbay lists podcasts by category, giving us links to individual podcast pages "/show/$podcast_id".
+Podbay lists podcasts by category, giving us links to individual podcast pages ( "/show/$podcast_id" ).
 
 Reviews for a podcast are accessible at "/show/$podcast_id/reviews".
 
-By using xpath requests on a podcast's page we can easily retrieve the following elements:
+By using xpath requests on a podcast's review page we can easily retrieve the following elements:
 
 * id
 * thumbnail
 * title
 * description
 * homepage
-
-We will be able afterwards to trigger the retrieval of the reviews page in order to start parsing reviews in order to build a tag cloud
+* list of reviews
 
 =======
 License
