@@ -67,6 +67,6 @@ class PodbaySpiderForGames(CrawlSpider):
             "//div[@class='thumbnail']/a/img/@src"
         ).extract()[0]
         podcast['reviews'] = response.xpath(
-            "//div[@class='span8 well']/p/text()"
+            "//div[@class='span8 well']/op/text()"
         ).extract()
         return podcast

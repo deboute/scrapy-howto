@@ -20,7 +20,7 @@ class RemovesDuplicatesPipeline(object):
 
     def process_item(self, item, spider):
         if item['id'] in self.ids_seen:
-            raise DropItem("Duplicate item found: %s" % item)
+            raise DropItem("Duplicate item found: {}".format(item))
         else:
             self.ids_seen.add(item['id'])
             return item
@@ -28,4 +28,6 @@ class RemovesDuplicatesPipeline(object):
 class ValidatesPipeline(object):
     def process_item(self, item, spider):
         # add validation to taste
+        if not item['reviews']:
+            raise DropItem("No reviews for item: {}".format(item))
         return item
