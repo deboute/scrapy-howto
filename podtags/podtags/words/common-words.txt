@@ -419,6 +419,7 @@ turn
 turned
 turning
 turns
+try
 twas
 t'was
 two

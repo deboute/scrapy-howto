@@ -13,6 +13,8 @@ See: http://doc.scrapy.org/en/latest/topics/item-pipeline.html
 # BASE 
 import re
 import os
+import glob
+from collections import defaultdict
 # SCRAPY
 from scrapy.exceptions import DropItem
 
@@ -45,5 +47,99 @@ class ValidatesPipeline(object):
         return item
 
 class ParsesReviewsPipeline(object):
+    """
+    This class manages the parsing of reviews and the isolation
+    of non-common words
+    """
+    def __init__(self):
+        self.common_words = set()
+        # load all txt files located in the words directory
+        words_dir = os.path.join(
+            os.path.dirname(__file__), 'words'
+        )
+        # build a list of normalized common words to ignore
+        for words_file in glob.glob(os.path.join(words_dir, '*.txt')):
+            with open(
+                os.path.join(
+                    words_dir,
+                    words_file
+                ),
+                'r'
+            ) as fh:
+                for line in fh:
+                    self.common_words.add(
+                        unicode(line.strip().lower())
+                    )
+
+        # manage regexes
+        self.regexes = {
+            # lazy url discarder regex
+            'url': re.compile(
+                '|'.join([
+                    '^(http(s)?://|www\.)',
+                    '\.(com|it|net|org)($|/)'
+                ])),
+            # extra stuff discarder regex
+            'extras': re.compile(
+                r'\'(d|ll|m|re|s|t|ve)$',
+                flags=re.UNICODE
+            ),
+            # remove punctuation
+            'punctuation': re.compile(
+                r'[^\w\s]',
+                flags=re.UNICODE
+            ),
+            # token = word
+            'token': re.compile(
+                r'[\w]+',
+                flags=re.UNICODE
+            )
+        }
+
     def process_item(self, item, spider):
-        pass
+        """
+        Find non-common words and count their occurences
+        """
+        reviews_words = defaultdict(int)
+        # for each review
+        for review in item['reviews']:
+            # tokenize text
+            for token in self._tokenize(review):
+                # increment counter for each non-common token
+                if token not in self.common_words:
+                    reviews_words[token] += 1
+        # build popular words dictionary
+        popular_words = defaultdict(int)
+        for (word, count) in reviews_words.items():
+            if count > 1:
+                popular_words[word] = count
+
+        item['tags'] = popular_words
+        # drop reviews now we extracted meaningful tags
+        del(item['reviews'])
+        return item
+
+    def _tokenize(self, text):
+        """
+        Return individual tokens from a block of text.
+
+        :param text: text to tokenize
+        :type text: str
+
+        :returns: list of (normalized) string tokens
+        """
+        tokens = []
+        for token in text.split():
+            # throw urls away
+            if self.regexes['url'].search(token):
+                continue
+            # normalize token
+            token = token.lower()
+            token = self.regexes['extras'].sub('', token)
+            for sub_token in self.regexes['token'].findall(token):
+                if sub_token:
+                    sub_token = sub_token.lower()
+                # add normalized subtoken to list
+                if sub_token not in tokens:
+                    tokens.append(sub_token)
+        return tokens

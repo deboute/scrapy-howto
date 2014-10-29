@@ -35,13 +35,12 @@ class PodbaySpiderForGames(CrawlSpider):
     name = 'podbay'
     allowed_domains = ['podbay.fm']
     start_urls = [
-        #'http://podbay.fm/browse/games-and-hobbies'
-        'http://podbay.fm/show/580709168'
+        'http://podbay.fm/browse/games-and-hobbies'
     ]
     rules = [
         # first rule extracts individual podcast pages links from start_url
         Rule(
-            LinkExtractor(allow=['/show/5\d+$']),
+            LinkExtractor(allow=['/show/\d+$']),
             follow=True
         ),
         # second rule follows reviews page from individual podcast page
@@ -74,6 +73,6 @@ class PodbaySpiderForGames(CrawlSpider):
             "//div[@class='thumbnail']/a/img/@src"
         ).extract()[0]
         podcast['reviews'] = response.xpath(
-            "//div[@class='span8 well']/op/text()"
+            "//div[@class='span8 well']/p/text()"
         ).extract()
         return podcast

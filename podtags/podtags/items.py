@@ -19,3 +19,4 @@ class PodcastItem(scrapy.Item):
     description = scrapy.Field()
     homepage = scrapy.Field()
     reviews = scrapy.Field()
+    tags = scrapy.Field()
