@@ -1,19 +1,45 @@
-.. _podtags_package:
+podtags package
+===============
 
-=============
-podtags.items
-=============
+Subpackages
+-----------
+
+.. toctree::
+
+    podtags.spiders
+
+Submodules
+----------
+
+podtags.items module
+--------------------
 
 .. automodule:: podtags.items
+    :members:
+    :undoc-members:
+    :show-inheritance:
 
-=================
-podtags.pipelines
-=================
+podtags.pipelines module
+------------------------
 
 .. automodule:: podtags.pipelines
+    :members:
+    :undoc-members:
+    :show-inheritance:
 
-===============
-podtags.spiders
-===============
+podtags.settings module
+-----------------------
 
-.. automodule:: podtags.spiders.podbay
+.. automodule:: podtags.settings
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+
+Module contents
+---------------
+
+.. automodule:: podtags
+    :members:
+    :undoc-members:
+    :show-inheritance:

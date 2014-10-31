@@ -9,9 +9,10 @@ Welcome to scrapy-howto-podtags's documentation!
 Contents:
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 1
 
    podtags
+   podtags.spiders
 
 
 

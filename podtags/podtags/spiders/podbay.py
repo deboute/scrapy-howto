@@ -15,7 +15,7 @@ from scrapy.contrib.linkextractors import LinkExtractor
 from podtags.items import PodcastItem
 
 # DECORATOR
-def fail_parsing(func):
+def failParsing(func):
     """Do not use while debugging xpath
     """
     def wrapper(*args, **kwargs):
@@ -46,13 +46,14 @@ class PodbaySpiderForGames(CrawlSpider):
         # second rule follows reviews page from individual podcast page
         Rule(
             LinkExtractor(allow=['show/\d+/reviews$']),
-            callback='parse_podcast'
+            callback='parsePodcast'
         ),
     ]
 
-    @fail_parsing
-    def parse_podcast(self, response):
-        """This function gets basic data for a podcast
+    @failParsing
+    def parsePodcast(self, response):
+        """
+        This function gets basic data for a podcast
 
         :param response: A Response object
         :type response: Response
