@@ -2,7 +2,7 @@
 Simple scrapy howto: podtags
 ****************************
 
-`Scrapy`_ is a python framework allowing the easy creation if web crawlers, spiders and scrappers.
+Scrapy_ is a python framework allowing the easy creation if web crawlers, spiders and scrappers.
 
 This howto will show how to scrap a podcast directory and extract reviews in order to create word clouds for each podcast.
 
@@ -25,20 +25,20 @@ install scrapy
   $ pip install scrapy
   $ pip install service_identity
 
-`Scrapy`_ is built upon `Twisted`_, the asynchronous multi-protocol networking framework.
+Scrapy_ is built upon Twisted_, the asynchronous multi-protocol networking framework.
 
 ==========================
 Start a new scrapy project
 ==========================
 
-`Scrapy`_ provides a CLI, very much like django-admin, that allows you to setup a new project
+Scrapy_ provides a CLI, very much like django-admin, that allows you to setup a new project
 
 ::
 
   $ scrapy startproject podtags
 
 
-This will tell `Scrapy`_ to create the basic files it needs
+This will tell Scrapy_ to create the basic files it needs
 
 ::
 

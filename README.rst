@@ -1,6 +1,6 @@
-****************************
-Simple scrapy howto: podtags
-****************************
+*************
+Scrapy howtos
+*************
 
 Scrapy_ is a python framework, built upon Twisted_, allowing the easy creation if web crawlers, spiders and scrappers.
 
