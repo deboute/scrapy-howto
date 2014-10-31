@@ -46,12 +46,12 @@ class PodbaySpiderForGames(CrawlSpider):
         # second rule follows reviews page from individual podcast page
         Rule(
             LinkExtractor(allow=['show/\d+/reviews$']),
-            callback='parsePodcast'
+            callback='parse_podcast'
         ),
     ]
 
     @failParsing
-    def parsePodcast(self, response):
+    def parse_podcast(self, response):
         """
         This function gets basic data for a podcast
 
