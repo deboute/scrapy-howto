@@ -3,7 +3,7 @@
 # use 4 spaces to indent, NO TAB
 # vim: ai ts=4 sts=4 et sw=4
 """
-Definition of a Podcast object
+Definition of a Podcast Item 
 
 See documentation in:
 http://doc.scrapy.org/en/latest/topics/items.html
@@ -11,7 +11,8 @@ http://doc.scrapy.org/en/latest/topics/items.html
 import scrapy
 
 class PodcastItem(scrapy.Item):
-    """This class defines a podcast
+    """
+    This class defines a podcast Item
     """
     id = scrapy.Field()
     thumbnail = scrapy.Field()

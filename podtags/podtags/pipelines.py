@@ -29,9 +29,27 @@ class RemovesDuplicatesPipeline(object):
     Removes duplicate entries.
     """
     def __init__(self):
+        """
+        Initialize global id store
+        """
         self.ids_seen = set()
 
-    def process_item(self, item, spider):
+    def process_item(
+            self,
+            item,
+            spider
+        ):
+        """
+        Check if item id is already in the global store
+
+        :param item: item object instance
+        :type item: object
+
+        :param spider: spider object instance
+        :type spider: object
+
+        :returns: item object
+        """
         if item['id'] in self.ids_seen:
             raise DropItem("Duplicate item found: {}".format(item))
         else:
@@ -42,7 +60,22 @@ class ValidatesPipeline(object):
     """
     Manages simple items validation
     """
-    def process_item(self, item, spider):
+    def process_item(
+            self,
+            item,
+            spider
+        ):
+        """
+        Test if item is sufficiently well-formed
+
+        :param item: item object instance
+        :type item: object
+
+        :param spider: spider object instance
+        :type spider: object
+
+        :returns: item object
+        """
         # add validation to taste
         if not item['reviews']:
             raise DropItem("No reviews for item: {}".format(item))
@@ -54,6 +87,9 @@ class ParsesReviewsPipeline(object):
     of non-common words
     """
     def __init__(self):
+        """
+        Define regexes used to parse the text of the reviews
+        """
         # manage regexes
         self.regexes = {
             # lazy url discarder regex
@@ -74,9 +110,21 @@ class ParsesReviewsPipeline(object):
             )
         }
 
-    def process_item(self, item, spider):
+    def process_item(
+            self,
+            item,
+            spider
+        ):
         """
         Find non-common words and count their occurences
+
+        :param item: item object instance
+        :type item: object
+
+        :param spider: spider object instance
+        :type spider: object
+
+        :returns: item object
         """
         reviews_words = defaultdict(int)
         # for each review
@@ -97,7 +145,10 @@ class ParsesReviewsPipeline(object):
         del(item['reviews'])
         return item
 
-    def _tokenize(self, text):
+    def _tokenize(
+            self,
+            text
+        ):
         """
         Return individual tokens from a block of text.
 

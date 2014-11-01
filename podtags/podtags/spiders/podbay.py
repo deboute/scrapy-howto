@@ -16,7 +16,9 @@ from podtags.items import PodcastItem
 
 # DECORATOR
 def failParsing(func):
-    """Do not use while debugging xpath
+    """
+    Decorator function used to silentely fail Item parsing
+    DO NOT USE WHEN DEBUGGING XPATH EXPRESSIONS
     """
     def wrapper(*args, **kwargs):
         try:
@@ -28,7 +30,8 @@ def failParsing(func):
 
 # SPIDER
 class PodbaySpiderForGames(CrawlSpider):
-    """This class defines a spider that parses games and hobbies podcasts
+    """
+    This class defines a spider that parses games and hobbies podcasts
     in order to fetch basic data on them and a stack of reviews
     """
     # these variables define where our spider will start scrapping
@@ -51,7 +54,10 @@ class PodbaySpiderForGames(CrawlSpider):
     ]
 
     @failParsing
-    def parse_podcast(self, response):
+    def parse_podcast(
+            self,
+            response
+        ):
         """
         This function gets basic data for a podcast
 
