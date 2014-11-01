@@ -25,5 +25,6 @@ var/
 docs/build
 # other
 *.log
+*.bak
 # pip
 pip-log.txt
