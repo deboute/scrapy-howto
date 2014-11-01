@@ -17,6 +17,8 @@ import glob
 from collections import defaultdict
 # SCRAPY
 from scrapy.exceptions import DropItem
+# CUSTOM
+from podtags.words import common_words
 
 #
 # PIPELINE CLASSES
@@ -52,25 +54,6 @@ class ParsesReviewsPipeline(object):
     of non-common words
     """
     def __init__(self):
-        self.common_words = set()
-        # load all txt files located in the words directory
-        words_dir = os.path.join(
-            os.path.dirname(__file__), 'words'
-        )
-        # build a list of normalized common words to ignore
-        for words_file in glob.glob(os.path.join(words_dir, '*.txt')):
-            with open(
-                os.path.join(
-                    words_dir,
-                    words_file
-                ),
-                'r'
-            ) as fh:
-                for line in fh:
-                    self.common_words.add(
-                        unicode(line.strip().lower())
-                    )
-
         # manage regexes
         self.regexes = {
             # lazy url discarder regex
@@ -82,11 +65,6 @@ class ParsesReviewsPipeline(object):
             # extra stuff discarder regex
             'extras': re.compile(
                 r'\'(d|ll|m|re|s|t|ve)$',
-                flags=re.UNICODE
-            ),
-            # remove punctuation
-            'punctuation': re.compile(
-                r'[^\w\s]',
                 flags=re.UNICODE
             ),
             # token = word
@@ -106,7 +84,7 @@ class ParsesReviewsPipeline(object):
             # tokenize text
             for token in self._tokenize(review):
                 # increment counter for each non-common token
-                if token not in self.common_words:
+                if token not in common_words:
                     reviews_words[token] += 1
         # build popular words dictionary
         popular_words = defaultdict(int)
