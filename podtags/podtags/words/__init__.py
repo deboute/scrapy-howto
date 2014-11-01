@@ -15,7 +15,8 @@ import glob
 common_words = set()
 words_dir = os.path.dirname(__file__)
 
-# build a list of normalized common words to ignore
+# read all locally present .txt files to build a list
+# a list of common words to ignore and normalize them
 for words_file in glob.glob(os.path.join(words_dir, '*.txt')):
     with open(
         os.path.join(
