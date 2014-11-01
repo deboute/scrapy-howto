@@ -19,7 +19,7 @@ class testHTMLServer(BaseHTTPRequestHandler):
         Map specific URLs to specific HTML files
         """
         if self.path == "/browse/games-and-hobbies":
-	    self.path = "directory.html"
+    	    self.path = "directory.html"
         elif self.path == "/show/123456789":
             self.path = "123456789.html"
         elif self.path == "/show/123456789/reviews":

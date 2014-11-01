@@ -8,13 +8,14 @@ Spider definition for podbay.fm
 #
 # IMPORTS
 #
-#SCRAPY
+# SCRAPY
 from scrapy.contrib.spiders import CrawlSpider, Rule
 from scrapy.contrib.linkextractors import LinkExtractor
 # CUSTOM
 from podtags.items import PodcastItem
 
-# DECORATOR
+
+# DECORATOR
 def failParsing(func):
     """
     Decorator function used to silentely fail Item parsing
@@ -27,6 +28,7 @@ def failParsing(func):
             # add logging to taste.
             pass
     return wrapper
+
 
 # SPIDER
 class PodbaySpiderForGames(CrawlSpider):
@@ -46,7 +48,7 @@ class PodbaySpiderForGames(CrawlSpider):
             LinkExtractor(allow=['/show/\d+$']),
             follow=True
         ),
-        # second rule follows reviews page from individual podcast page
+        # second rule follows reviews page from individual podcast page
         Rule(
             LinkExtractor(allow=['show/\d+/reviews$']),
             callback='parse_podcast'
@@ -69,7 +71,7 @@ class PodbaySpiderForGames(CrawlSpider):
         podcast = PodcastItem()
         # extract podcast id from parsed url
         podcast['id'] = response.url.split('/')[-2]
-        # navigate xpaths to extract meaningful data from the page
+        # navigate xpaths to extract meaningful data from the page
         podcast['title'] = response.xpath(
             "//div[@class='well sidebar-nav']/h4/text()"
         ).extract()[0]

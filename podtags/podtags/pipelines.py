@@ -10,15 +10,14 @@ See: http://doc.scrapy.org/en/latest/topics/item-pipeline.html
 #
 # IMPORTS
 #
-# BASE 
+# BASE
 import re
-import os
-import glob
 from collections import defaultdict
 # SCRAPY
 from scrapy.exceptions import DropItem
-# CUSTOM
+# CUSTOM
 from podtags.words import common_words
+
 
 #
 # PIPELINE CLASSES
@@ -56,6 +55,7 @@ class RemovesDuplicatesPipeline(object):
             self.ids_seen.add(item['id'])
             return item
 
+
 class ValidatesPipeline(object):
     """
     Manages simple items validation
@@ -81,6 +81,7 @@ class ValidatesPipeline(object):
             raise DropItem("No reviews for item: {}".format(item))
         return item
 
+
 class ParsesReviewsPipeline(object):
     """
     This class manages the parsing of reviews and the isolation
@@ -92,7 +93,7 @@ class ParsesReviewsPipeline(object):
         """
         # manage regexes
         self.regexes = {
-            # lazy url discarder regex
+            # lazy url discarder regex
             'url': re.compile(
                 '|'.join([
                     '^(http(s)?://|www\.)',
@@ -103,7 +104,7 @@ class ParsesReviewsPipeline(object):
                 r'\'(d|ll|m|re|s|t|ve)$',
                 flags=re.UNICODE
             ),
-            # token = word
+            # token = word
             'token': re.compile(
                 r'[\w]+',
                 flags=re.UNICODE
@@ -141,7 +142,7 @@ class ParsesReviewsPipeline(object):
                 popular_words[word] = count
 
         item['tags'] = popular_words
-        # drop reviews now we extracted meaningful tags
+        # drop reviews now we extracted meaningful tags
         del(item['reviews'])
         return item
 
@@ -162,13 +163,13 @@ class ParsesReviewsPipeline(object):
             # throw urls away
             if self.regexes['url'].search(token):
                 continue
-            # normalize token
+            # normalize token
             token = token.lower()
             token = self.regexes['extras'].sub('', token)
             for sub_token in self.regexes['token'].findall(token):
                 if sub_token:
                     sub_token = sub_token.lower()
-                # add normalized subtoken to list
+                # add normalized subtoken to list
                 if sub_token not in tokens:
                     tokens.append(sub_token)
         return tokens
