@@ -28,4 +28,3 @@ for words_file in glob.glob(os.path.join(words_dir, '*.txt')):
             common_words.add(
                 unicode(line.strip().lower())
             )
-
