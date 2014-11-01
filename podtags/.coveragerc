@@ -7,3 +7,6 @@ source = podtags
 [html]
 directory = docs/build/html/coverage
 title = Podtags tests coverage
+
+[xml]
+output = docs/build/html/coverage/coverage_podtags.xml
