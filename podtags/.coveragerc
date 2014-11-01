@@ -1,0 +1,9 @@
+[run]
+omit = tests*,docs*,.tox*,pbr*,setup.py
+cover_pylib = False
+branch = True
+source = podtags
+
+[html]
+directory = docs/build/html/coverage
+title = Podtags tests coverage
