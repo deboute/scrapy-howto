@@ -12,6 +12,7 @@ import os
 PORT_NUMBER = 8080
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
+
 class testHTMLServer(BaseHTTPRequestHandler):
     def do_GET(self):
         """
@@ -19,14 +20,14 @@ class testHTMLServer(BaseHTTPRequestHandler):
         Map specific URLs to specific HTML files
         """
         if self.path == "/browse/games-and-hobbies":
-    	    self.path = "directory.html"
+            self.path = "directory.html"
         elif self.path == "/show/123456789":
             self.path = "123456789.html"
         elif self.path == "/show/123456789/reviews":
             self.path = "reviews.html"
 
         try:
-            # Serve the static file mapped to the URL 
+            # Serve the static file mapped to the URL
             f = open(os.path.join(BASE_DIR, self.path))
             self.send_response(200)
             self.send_header('Content-type', 'text/html')

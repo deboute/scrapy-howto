@@ -8,15 +8,15 @@ Test spiders using local webserver
 #
 # IMPORT
 #
-# BASE
+# BASE
 import subprocess
 import unittest
 import os
-# SCRAPY
+# SCRAPY
 from scrapy.crawler import Crawler
 from scrapy.utils.project import get_project_settings
 from scrapy import log, signals
-# TWISTED
+# TWISTED
 from twisted.internet import reactor, task
 # CUSTOM
 from podtags.spiders.podbay import PodbaySpiderForGames
@@ -33,7 +33,8 @@ html_server = subprocess.Popen([
         'server.py'
     )
 ])
- 
+
+
 def setup_crawler(
         spider_class,
         **kwargs
@@ -45,9 +46,11 @@ def setup_crawler(
     :param spider_class: Spider class to test
     :type spider_class: text
     """
-    items = []
+
     def add_item(item):
         items.append(item)
+
+    items = []
     # create Crawler
     settings = get_project_settings()
     crawler = Crawler(settings)
@@ -57,13 +60,14 @@ def setup_crawler(
     # create & connect spider
     spider = spider_class(**kwargs)
     crawler.crawl(spider)
-    # start crawler
+    # start crawler
     log.start()
     crawler.start()
-    # run crawler
+    # run crawler
     task.deferLater(reactor, 1, reactor.stop)
     reactor.run()
     return items
+
 
 class SpidersTests(unittest.TestCase):
     """
@@ -78,19 +82,19 @@ class SpidersTests(unittest.TestCase):
             # and fetch generated items
             items = setup_crawler(
                 spider_class=PodbaySpiderForGames,
-                allowed_domains = ['localhost'],
-                start_urls = [
+                allowed_domains=['localhost'],
+                start_urls=[
                     'http://localhost:8080/browse/games-and-hobbies'
                 ]
             )
-            # execute test cases
+            # execute test cases
             self.assertEqual(len(items), 1)
             self.assertEqual(items[0]['id'], '123456789')
         except:
-            # end custom html server
-            # and raise Exception
+            # end custom html server
+            # and raise Exception
             html_server.kill()
             raise
         finally:
-            # end custom html server
+            # end custom html server
             html_server.kill()
