@@ -1,0 +1,46 @@
+CHANGES
+=======
+
+* Adding tox.ini for 'tox'
+* Adding .coveragerc for 'coverage'
+* Tweaks for setup.cfg
+* Add .coveragerc
+* Renaming doc to docs
+* removed whitespace
+* Cleaning doc/source/conf.py
+* PEP8 standardisation for tests
+* PEP8 standardisation
+* Normalize syntax and documentation
+* documentation string
+* refactoring test_spiders
+* removed trailing line
+* adding .bak to gitignore
+* move common words set generation from pipelines.py to words/__init__.py
+* Adding tests for spider podbay
+* Added tox.ini for podtags
+* Added .tox folder to .gitignore
+* Fix path for README.rst
+* sphinx tweaks
+* Edit READMEs
+* Created a README specifically for podtags project Created a README for the howtos root
+* adding sphinx documentation setup
+* adding setup using pbr
+* Adding .gitignore
+* Implemented wordcloud generation Finished documentation
+* adding common words file
+* Documentation, beautifying
+* Added basic validation
+* * managing parsing errors * adding pipeline
+* Edit README
+* Adding rst documentation
+* testing secondary extractor
+* edit README
+* - created the definition of a Podcast item - created a spider for podbay - updated README
+* edit README.rst
+* edit README.rst
+* README as rst
+* stupid mistake, i hate markdown
+* Adding MIT license
+* Initial commit
+* Adding README
+* Initialize blank scrapy project
